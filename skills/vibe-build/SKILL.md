@@ -1,6 +1,6 @@
 ---
 name: vibe-build
-description: Use after a PRD/spec exists (e.g. produced by product-recon) to implement it — greenfield builds or major feature waves. Forces spec-as-source-of-truth vibe-coding with discipline - a user-confirmed stack (existing projects keep their existing stack; greenfield gets a boring-by-default proposal the user approves), a persistent Build.md of end-to-end vertical slices starting with a walking skeleton, a run-it-like-a-user loop per slice composed with test-first / ui-excellence / durability-check, commit checkpoints, a three-strikes revert rule instead of layered patches, and a final FR-by-FR gap-check. Distilled from the instruction sets of Lovable, Bolt, Cursor, Kiro, GitHub Spec Kit, and practitioner vibe-coding workflows.
+description: Use after a PRD/spec exists (e.g. produced by product-recon) to implement it — greenfield builds or major feature waves. Forces spec-as-source-of-truth vibe-coding with discipline - a user-confirmed stack (existing projects keep their existing stack; greenfield gets a boring-by-default proposal the user approves), a persistent Build.md of end-to-end vertical slices starting with a walking skeleton, a run-it-like-a-user loop per slice composed with superpowers:test-driven-development / ui-excellence / durability-check, commit checkpoints, a three-strikes revert rule instead of layered patches, and a final FR-by-FR gap-check. Distilled from the instruction sets of Lovable, Bolt, Cursor, Kiro, GitHub Spec Kit, and practitioner vibe-coding workflows.
 ---
 
 ROLE: You are implementing a product from its spec — PRD.md and DataDictionary.md (produced by
@@ -8,6 +8,19 @@ the product-recon skill, or supplied). Vibe-coding here means speed WITH discipl
 the source of truth, the app is runnable after every slice, and every piece of code is observed
 working before it is called done. Momentum comes from small verified steps, not from generating
 a lot of code.
+
+STANDING REQUIREMENTS — every build ships these two, no exemption clause:
+- DOCS ROUTE: an in-app docs page (e.g. `/docs` in a Next.js frontend, the framework-appropriate
+  equivalent otherwise) with a sidebar + content layout in the style of a standard framework docs
+  site (nextjs.org/docs is the reference look). Exists and renders as part of Slice 0 (the walking
+  skeleton); each later slice adds its own entry — setup/run commands plus what the feature does —
+  before that slice's checkbox is ticked. A slice that ships a feature with no docs entry is not
+  done.
+- AUTH BYPASS FLAG: a build/env-gated flag (e.g. `DISABLE_AUTH=true`) that skips authentication for
+  local development and testing. Dev/local only — the flag must be inert (ignored, auth stays
+  enforced) whenever `NODE_ENV`/`ASPNETCORE_ENVIRONMENT`/equivalent is Production; wire this check
+  at the same place the flag is read, not as a separate guard that can drift out of sync. Wired in
+  Slice 0 alongside the auth chain itself, not bolted on after auth already exists.
 
 PHASE 0 — INTAKE & FOUNDATION.
 1. Read the PRD and data dictionary in full. No spec → stop and produce one first (product-recon
@@ -31,7 +44,9 @@ PHASE 1 — BUILD PLAN (vertical slices, persisted to disk).
    Never plan horizontal layers ("all entities, then all services, then all screens"): a layer
    cannot be experienced, so nothing gets verified until everything exists.
 5. Slice 0 is the WALKING SKELETON: app boots, one page renders, one entity round-trips to the
-   database, run/test commands documented and working. Everything after extends a running system.
+   database, run/test commands documented and working, the docs route renders, and the auth-bypass
+   flag is wired and confirmed inert in a production build (see STANDING REQUIREMENTS). Everything
+   after extends a running system.
 6. Each slice entry lists: the FR numbers it implements, acceptance criteria, status checkbox,
    and a notes line. Right-size so a slice is implementable and manually testable in one sitting;
    no big jumps in complexity; every slice ends INTEGRATED — code that nothing calls is a
@@ -40,9 +55,11 @@ PHASE 1 — BUILD PLAN (vertical slices, persisted to disk).
 
 PHASE 2 — THE LOOP (per slice, no step skipped).
 7. CHECKPOINT: commit the current green state before touching the slice.
-8. Implement behaviors test-first (test-first skill); build screens with ui-excellence. Security
-   floor on every slice: validate inputs at the boundary, no secrets in code, authorization on
-   every route that needs it.
+8. Implement behaviors test-first — **REQUIRED SUB-SKILL:** superpowers:test-driven-development
+   (RED: failing test from the behavior contract, observed to fail → GREEN: minimal code to pass →
+   REFACTOR under green tests). No production code without a failing test first, no exceptions for
+   "simple" slices. Build screens with ui-excellence. Security floor on every slice: validate
+   inputs at the boundary, no secrets in code, authorization on every route that needs it.
 9. RUN IT LIKE A USER: launch the app and exercise the slice by hand — click the buttons, submit
    the forms, read the logs/console/network. Compiling and passing tests do NOT close a slice;
    only observed behavior does.
@@ -68,10 +85,12 @@ PHASE 5 — FINISH LINE.
 12. Gap-check the build FR by FR with product-recon verdicts: IMPLEMENTED (cite the slice) /
     PARTIAL / MISSING / CONTRADICTED. Walk the UI state matrix on the key screens (empty,
     loading, error, extreme data). Write a demo script: the exact clicks/commands that prove
-    each FR.
+    each FR. Confirm the docs route covers every shipped feature and the auth-bypass flag is
+    still inert in a production build (STANDING REQUIREMENTS).
 
 OUTPUT per working session: updated Build.md (statuses + notes), what was RUN and what was
 OBSERVED for each slice touched, assumptions made, and the current gap-check state.
 BANNED: "should work now" without having run it; starting a second slice on top of an unrun
 first one; horizontal-layer plans; a third patch attempt instead of a revert; code that traces
-to no FR; skipping slice 0 because "the setup is obvious".
+to no FR; skipping slice 0 because "the setup is obvious"; shipping a feature slice with no docs
+entry; an auth-bypass flag with no production guard, or one wired after auth already shipped.

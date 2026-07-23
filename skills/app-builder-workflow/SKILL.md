@@ -18,7 +18,7 @@ DISPATCH TABLE — match by task SHAPE, not by whether the user names a skill:
 | A code change exists and must be verified before commit / declared done | durability-check |
 | Is this claim/doc/comment/number true | fact-check |
 | Any UI to design or build | ui-excellence |
-| A new behavior is about to be coded (feature, endpoint, bug fix) | test-first |
+| A new behavior is about to be coded (feature, endpoint, bug fix) | superpowers:test-driven-development |
 | New/early-stage project; "what should this be"; PRD or data dictionary needed | product-recon |
 | A PRD/spec exists and must become working software | vibe-build |
 
@@ -30,18 +30,19 @@ TIE-BREAKERS (the common confusions, decided):
   scalability-audit.
 - product-recon defines WHAT to build; vibe-build BUILDS it; arch-recon explains what already
   EXISTS. A task can need all three — in that order.
-- test-first is not a routing destination on its own; it is the mandatory ordering inside any
-  skill or task that writes new code.
+- superpowers:test-driven-development is not a routing destination on its own; it is the mandatory
+  RED-GREEN-REFACTOR ordering inside any skill or task that writes new code.
 
 CANONICAL CHAINS (the position each skill occupies in a pipeline):
 1. GREENFIELD PRODUCT: product-recon → GATE (user approves PRD) → vibe-build, which per slice
-   composes test-first (behaviors), ui-excellence (screens), durability-check (slice close) →
-   final FR-by-FR gap-check.
+   composes superpowers:test-driven-development (behaviors), ui-excellence (screens),
+   durability-check (slice close) → final FR-by-FR gap-check.
 2. EXISTING PROJECT, NEW SCOPE: arch-recon once (verified model of what exists) → product-recon
    (full, or just its Phase 5 gap-check if a PRD already exists) → GATE (user approves) →
    vibe-build on the approved scope, matching the existing stack and dialect.
 3. BUG REPORT: bug-hunt (localize; concrete failing input) → fix-design per confirmed defect
-   (its failing-test-before-fix step IS the test-first ordering) → durability-check before done.
+   (its failing-test-before-fix step IS the superpowers:test-driven-development ordering) →
+   durability-check before done.
 4. PERFORMANCE/CAPACITY: scalability-audit → fix-design per ranked bottleneck, cheapest
    mitigation first → durability-check.
 5. CLAIM AUDIT: fact-check → any FALSE claim about code behavior becomes a bug-hunt/fix-design

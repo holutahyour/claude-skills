@@ -11,7 +11,8 @@ and creates no new hidden defects. Non-negotiable steps:
    again (errors now surfaced, messages now delivered, records now written), trace where that
    new flood lands and confirm downstream handles it.
 2. REGRESSION TEST THAT ENCODES THE BUG. This test must have been written and observed to FAIL
-   BEFORE the fix code was written (see the test-first skill): it fails on pre-fix code and
+   BEFORE the fix code was written (see the superpowers:test-driven-development skill): it fails
+   on pre-fix code and
    passes on the fixed code. A test that passes on both proves nothing. If the fix was written
    first, the ordering mandate was violated — stash or disable the fix, confirm the test fails
    without it, then restore. State which test you wrote and show both outcomes.

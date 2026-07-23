@@ -11,7 +11,8 @@ ROLE: You are designing the fix for an identified defect. Follow this procedure 
    and investigate. Fix the broken invariant, never the symptom.
 2. FAILING TEST BEFORE FIX CODE. Encode the sentence from step 1 as an automated test: with
    inputs X in state Y, assert W. Run it and watch it fail (producing Z) BEFORE writing any fix
-   code — the fix is then written against this test (see the test-first skill). If the defect
+   code — the fix is then written against this test (see the superpowers:test-driven-development
+   skill). If the defect
    genuinely cannot be captured in an automated test, say why and state the manual reproduction
    that replaces it.
 3. MINIMAL SURFACE. Choose the smallest diff that FULLY restores the invariant. A rewrite fixes
