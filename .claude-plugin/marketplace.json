@@ -1,0 +1,20 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "holutahyour-skills",
+  "description": "Victor Onibudo's Claude Code skills and plugins.",
+  "owner": {
+    "name": "Victor Onibudo"
+  },
+  "plugins": [
+    {
+      "name": "challenge-idea",
+      "description": "Stress-tests every idea, plan, skill choice and agent recommendation before it is adopted, with hooks that run it automatically.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Victor Onibudo"
+      },
+      "category": "productivity",
+      "source": "./plugins/challenge-idea"
+    }
+  ]
+}

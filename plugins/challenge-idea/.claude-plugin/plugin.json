@@ -1,0 +1,10 @@
+{
+  "name": "challenge-idea",
+  "version": "1.0.0",
+  "description": "Stress-tests every idea, plan, skill choice and agent recommendation before it is adopted: steelman, cited weak points against the real context, an improved version, and a verdict. Hooks run it automatically on each prompt, after each skill or agent call, and inside every subagent.",
+  "author": {
+    "name": "Victor Onibudo"
+  },
+  "repository": "https://github.com/holutahyour/claude-skills",
+  "keywords": ["review", "critique", "planning", "red-team", "decision-making"]
+}
