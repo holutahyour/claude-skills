@@ -30,8 +30,8 @@ hook. This repo is a plugin marketplace; in Claude Code run:
 
 - `challenge-idea` — stress-tests an idea, plan, skill choice or agent recommendation before it
   is adopted: steelmans it, finds weak points against the real context (each one cited), returns
-  an improved version and a verdict (ADOPT / ADOPT REVISED / REPLACE / REJECT). Its hooks remind
-  Claude to run it on every prompt, after every skill or agent call, and inside every subagent —
+  an improved version and a verdict (ADOPT / ADOPT REVISED / REPLACE / REJECT). Its hooks give
+  Claude a standing rule at session start and remind it after every skill or agent call and inside every subagent —
   reminders only, nothing is blocked; small ideas get a one-line light pass.
   Needs `sh` on PATH (macOS/Linux, or Git for Windows). Skill only, without the hooks:
   `cp -r plugins/challenge-idea/skills/challenge-idea ~/.claude/skills/`

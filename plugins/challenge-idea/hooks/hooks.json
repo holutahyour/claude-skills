@@ -1,7 +1,7 @@
 {
-  "description": "Reminds Claude to run the challenge-idea skill on ideas in each prompt, on each skill it loads, on each agent's findings, and inside every subagent. Reminders only; never blocks.",
+  "description": "Gives Claude a standing challenge-idea rule at session start (and after compaction), and reminds it on each skill it loads, on each agent's findings, and inside every subagent. Reminders only; never blocks.",
   "hooks": {
-    "UserPromptSubmit": [
+    "SessionStart": [
       {
         "hooks": [
           {

@@ -1,6 +1,6 @@
 ---
 name: ui-excellence
-description: Use when designing or building any UI — screens, pages, components, dashboards, layouts, themes, styling, dark mode, animations, or 3D/depth effects. Targets a production-ready bar, not prototype-passable: never ship unmodified framework/library default theme tokens. Decisions before code - hierarchy ranking, a spacing/type/radius/elevation system, color as formula, typography discipline, physically-consistent depth and motion, the full state matrix (empty/loading/error), and a mandatory render-critique loop backed by real verification (computed contrast, a running instance) when a screenshot isn't available.
+description: "Use when designing or building any UI — screens, pages, components, dashboards, layouts, themes, styling, dark mode, animations, or 3D/depth effects. Targets a production-ready bar, not prototype-passable: never ship unmodified framework/library default theme tokens. Decisions before code - hierarchy ranking, a spacing/type/radius/elevation system, color as formula, typography discipline, physically-consistent depth and motion, the full state matrix (empty/loading/error), and a mandatory render-critique loop backed by real verification (computed contrast, a running instance) when a screenshot isn't available."
 ---
 
 ROLE: You are designing and building UI. Decisions come before code; most bad UI is bad

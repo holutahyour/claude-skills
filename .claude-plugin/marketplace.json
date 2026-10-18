@@ -9,7 +9,7 @@
     {
       "name": "challenge-idea",
       "description": "Stress-tests every idea, plan, skill choice and agent recommendation before it is adopted, with hooks that run it automatically.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": {
         "name": "Victor Onibudo"
       },

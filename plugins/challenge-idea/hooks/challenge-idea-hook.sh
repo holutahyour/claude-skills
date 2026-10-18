@@ -1,16 +1,18 @@
 #!/bin/sh
 # Routes ideas, plans, skill choices and agent output through the challenge-idea skill.
-# Wired by hooks/hooks.json on UserPromptSubmit, PostToolUse (Skill|Agent) and SubagentStart.
+# Wired by hooks/hooks.json on SessionStart, PostToolUse (Skill|Agent) and SubagentStart.
 # Prints a hookSpecificOutput.additionalContext reminder; never blocks anything.
-# POSIX sh, not PowerShell: this runs on every prompt and powershell.exe startup measured ~6x slower.
+# POSIX sh, not PowerShell: powershell.exe startup measured ~6x slower. A per-prompt
+# (UserPromptSubmit) reminder timed out under load, so the standing rule is given once at
+# SessionStart instead.
 
 payload=$(cat)
 event=$(printf '%s' "$payload" | sed -n 's/.*"hook_event_name"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')
 context=""
 
 case "$event" in
-  UserPromptSubmit)
-    context="[challenge-idea] If this message proposes, requests or approves an idea, plan, design, approach, or skill/agent choice of real consequence - or you are about to present or execute a plan of your own - run the challenge-idea skill on it first (LIGHT pass for small ideas, FULL for costly or hard-to-reverse ones). Skip for plain questions, trivial edits, and go-aheads on an idea already challenged."
+  SessionStart)
+    context="[challenge-idea] Standing rule for this session: whenever a message proposes, requests or approves an idea, plan, design, approach, or skill/agent choice of real consequence - or you are about to present or execute a plan of your own - run the challenge-idea skill on it first (LIGHT pass for small ideas, FULL for costly or hard-to-reverse ones). Skip for plain questions, trivial edits, and go-aheads on an idea already challenged."
     ;;
   PostToolUse)
     tool=$(printf '%s' "$payload" | sed -n 's/.*"tool_name"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')
