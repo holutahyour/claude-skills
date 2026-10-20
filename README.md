@@ -47,6 +47,7 @@ hook. This repo is a plugin marketplace; in Claude Code run:
 - `fix-design` — root-cause-first bug fix design
 - `kdp-book-writer` — draft a full book for KDP
 - `product-recon` — PRD + data dictionary for new/early-stage projects
+- `redundancy-audit` — find duplication, dead code, unused deps and waste; report-only, ranked by payoff vs risk
 - `scalability-audit` — find what breaks first under load/growth
 - `test-first` — write the test before the implementation
 - `ui-excellence` — UI design and build discipline

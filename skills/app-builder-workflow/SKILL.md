@@ -14,6 +14,7 @@ DISPATCH TABLE — match by task SHAPE, not by whether the user names a skill:
 | Unfamiliar codebase/area; "how does this work"; before changing a system you don't know | arch-recon |
 | Find unknown defects; audit correctness; "anything wrong here?" | bug-hunt |
 | Load/growth/capacity questions; "will this scale"; bottleneck hunting | scalability-audit |
+| Redundancy, duplication, dead/unused code or deps, bloat; "is this lean / well optimized"; "what can we delete" | redundancy-audit |
 | One SPECIFIC, already-identified defect needs a fix designed or implemented | fix-design |
 | A code change exists and must be verified before commit / declared done | durability-check |
 | Is this claim/doc/comment/number true | fact-check |
@@ -28,6 +29,8 @@ TIE-BREAKERS (the common confusions, decided):
 - "Verify this claim/doc" → fact-check. "Verify my change works" → durability-check.
 - Produces WRONG results → bug-hunt. Produces RIGHT results too slowly / won't survive growth →
   scalability-audit.
+- Wasted work or code at TODAY's size (done twice, unused, unreached) → redundancy-audit. Won't
+  survive growth → scalability-audit.
 - product-recon defines WHAT to build; vibe-build BUILDS it; arch-recon explains what already
   EXISTS. A task can need all three — in that order.
 - superpowers:test-driven-development is not a routing destination on its own; it is the mandatory
